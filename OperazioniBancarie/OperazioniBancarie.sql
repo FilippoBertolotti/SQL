@@ -1,8 +1,3 @@
-/* ============================================
-   DATABASE: OPERAZIONI_BANCARIE
-   ESERCITAZIONE 3 - SOLO QUERY SQL
-   ============================================ */
-
 /* 1. Elenco di tutte le città */
 SELECT NomeCitta
 FROM CITTA;
