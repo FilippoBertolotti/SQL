@@ -17,10 +17,40 @@ FROM registrazione r
 JOIN artista q ON q.`ID` = r.`IDARTISTA`
 WHERE q.`NOME` = :nome AND q.`COGNOME` = :cognome;
 -- 4. Individuare qual è l’artista di un determinato brano.
+SELECT a.NOME, a.COGNOME, b.TITOLO
+FROM BRANO b
+JOIN INTERPRETARE i ON b.ID = i.IDBRANO
+JOIN REGISTRAZIONE r ON r.ID = i.IDREGISTRAZIONE
+JOIN ARTISTA a ON a.ID = r.IDARTISTA
+WHERE b.TITOLO = :titolo;
 -- 5. Individuare quali e quanti sono i brani appartenenti ad un determinato genere.
+SELECT r.GENERE, COUNT(i.IDBRANO) AS Numero_Brani
+FROM REGISTRAZIONE r
+JOIN INTERPRETARE i ON r.ID = i.IDREGISTRAZIONE
+WHERE r.GENERE = :genere
+GROUP BY r.GENERE;
 -- 6. Conoscere l’elenco degli artisti ordinato in modo crescente.
+SELECT NOME, COGNOME
+FROM ARTISTA
+ORDER BY COGNOME ASC, NOME ASC;
 -- 7. Visualizzate gli artisti che hanno brani che durano non più di 2 min.
+SELECT DISTINCT a.NOME, a.COGNOME
+FROM ARTISTA a
+JOIN REGISTRAZIONE r ON a.ID = r.IDARTISTA
+JOIN INTERPRETARE I ON r.ID = i.IDREGISTRAZIONE
+JOIN BRANO b ON b.ID = i.IDBRANO
+WHERE b.DURATA <= 2;
 -- 8. Visualizzate tutti gli artisti il cui nome inizia con la lettera R
+SELECT NOME, COGNOME
+FROM ARTISTA
+WHERE NOME LIKE "R%";
 -- 9. Visualizzate la media dei costi di tutte le registrazioni di un determinato artista
+SELECT AVG(r.COSTO) AS Costo_Medio
+FROM REGISTRAZIONE r
+JOIN ARTISTA a ON a.ID = r.IDARTISTA
+WHERE a.NOME = :nome AND a.COGNOME = :cognome;
 -- 10. Visualizzate tutte le durate dei brani in ordine decrescente. Ciascuna durata deve essere
 -- visualizzata una sola volta.
+SELECT DISTINCT DURATA
+FROM BRANO
+ORDER BY DURATA DESC;
