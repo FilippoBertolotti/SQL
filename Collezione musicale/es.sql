@@ -52,7 +52,7 @@ GROUP BY a.`ID`;
 -- 8. Visualizzate tutti gli artisti il cui nome inizia con la lettera R
 SELECT NOME, COGNOME
 FROM ARTISTA
-WHERE NOME LIKE "R%";
+WHERE `COGNOME` LIKE "R%";
 
 -- 9. Visualizzate la media dei costi di tutte le registrazioni di un determinato artista
 SELECT ROUND(AVG(r.COSTO),2) AS Costo_Medio
