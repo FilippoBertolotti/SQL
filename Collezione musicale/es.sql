@@ -41,12 +41,13 @@ FROM ARTISTA
 ORDER BY COGNOME ASC, NOME ASC;
 
 -- 7. Visualizzate gli artisti che hanno brani che durano non più di 2 min.
-SELECT DISTINCT a.COGNOME, a.NOME
+SELECT a.COGNOME, a.NOME
 FROM ARTISTA a
 JOIN REGISTRAZIONE r ON a.ID = r.IDARTISTA
 JOIN INTERPRETARE I ON r.ID = i.IDREGISTRAZIONE
 JOIN BRANO b ON b.ID = i.IDBRANO
-WHERE b.DURATA <= 2;
+WHERE b.DURATA <= 2
+GROUP BY a.`ID`;
 
 -- 8. Visualizzate tutti gli artisti il cui nome inizia con la lettera R
 SELECT NOME, COGNOME
