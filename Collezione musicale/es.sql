@@ -65,3 +65,10 @@ WHERE a.NOME = :nome AND a.COGNOME = :cognome;
 SELECT DISTINCT DURATA
 FROM BRANO
 ORDER BY DURATA DESC;
+
+-- 11. Conoscere i cognomi degli artisti con meno di 2 registrzioni 
+SELECT a.COGNOME, COUNT(*) AS Numero_Registrazioni
+FROM ARTISTA a
+JOIN REGISTRAZIONE r ON a.ID = r.IDARTISTA
+GROUP BY a.ID
+HAVING COUNT(*) < 2;
